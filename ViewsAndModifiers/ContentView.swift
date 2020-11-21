@@ -45,18 +45,27 @@ extension View {
     }
 }
 
+struct LargeAndBlue: ViewModifier {
+
+    func body(content: Content) -> some View {
+        content
+            .font(.largeTitle)
+            .foregroundColor(.blue)
+    }
+}
+
+extension View {
+    func largeAndBlue() -> some View {
+        self.modifier(LargeAndBlue())
+    }
+}
+
 struct ContentView: View {
     @State private var useRed = false
 
     var body: some View {
-        Button("Hello World") {
-            // flip the Boolean between true and false
-            self.useRed.toggle()
-        }
-        .foregroundColor(.white)
-        .frame(width: 300, height: 200)
-        .background(useRed ? Color.red : Color.blue)
-        .watermarked(with: "I should go to sleep")
+        Text("Large and blue title")
+            .largeAndBlue()
     }
 }
 
